@@ -31,7 +31,7 @@ All processing happens automatically once you select your REF file - no manual h
 
 1. **Clone or download this repository**
     ```bash
-    git clone <repository-url>
+    git clone "https://github.com/Sennadachi/ref2dbc4CAN"
     cd ref2dbc4CAN
     ```
 
