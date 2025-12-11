@@ -6,27 +6,63 @@ This repository converts `.REF` files from **[Racelogic's website](https://www.v
 
 `.REF` files from Racelogic contain encoded data that needs to be extracted and converted for CAN analysis tools.
 
-## Data Extraction Process
+## How It Works
 
-The conversion requires extracting specific hex data from the `.REF` file:
+The application provides an intuitive UI that automates the entire conversion process:
 
-1. **Locate the hex data** that starts with `78 da`
-2. **Position**: This data appears immediately after the serial number in the file
-3. **Format**: The data is stored as binary/hex, not ASCII text
+1. **Select REF file** through the file browser
+2. **Automatic extraction** of compressed hex data from the REF file
+3. **Automatic decompression** using zlib inflation
+4. **Automatic parsing** of the CAN database structure
+5. **Generates a DBC file** with proper formatting for CAN analysis tools.
 
-## Required Tools
+This allows you to understand how your car talks.
 
-- **[Free Hex Editor Neo](https://www.hhdsoftware.com/free-hex-editor)** - Used to read and extract the hex data from `.REF` files
+All processing happens automatically once you select your REF file - no manual hex extraction required.
 
-## Usage
+## Setup Instructions
 
-1. Open the `.REF` file in Free Hex Editor Neo
-2. Find the serial number section
-3. Locate the hex sequence starting with `78 da` immediately following the serial number
-4. Extract this hex data
-5. Input the extracted data into the converter
+### Prerequisites
 
-## Why Hex Editor?
+- Python 3.7 or higher
+- pip (Python package manager)
 
-The `.REF` file format stores this critical data in binary format, not as readable ASCII text. A standard text editor won't display this data correctly, which is why a hex editor is necessary to properly read and extract the required bytes.
+### Installation
 
+1. **Clone or download this repository**
+    ```bash
+    git clone <repository-url>
+    cd ref2dbc4CAN
+    ```
+
+2. **Install required dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## How to Use
+
+### Using the UI
+
+1. **Launch the application** by running `python ref2dbc.py`
+2. **Click "Browse"** to select your `.REF` file
+3. **Click "Convert"** - the application handles everything automatically
+4. **Save the output** `.dbc` file to your preferred location
+
+The UI displays conversion progress and any errors encountered during processing.
+
+### Batch Conversion
+
+Process multiple REF files at once through the UI's batch mode option.
+
+## Output
+
+The generated `.dbc` file will contain:
+
+- CAN message definitions
+- Signal mappings
+- Scaling factors and units
+- Min/max value ranges
+- Description fields
+
+The output is compatible with standard CAN analysis tools like CANalyzer, Busmaster, and SavvyCAN.

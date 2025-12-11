@@ -159,7 +159,11 @@ def _decode_blocks(blocks: list[bytes]) -> list[str]:
 
 
 def _parse_signal(row: str) -> DbcSignal | None:
-    parts = [p for p in row.split(",") if p != ""]
+    parts = row.split(",")
+    # trailing comma in source rows creates a final empty element; drop it but keep interior empties (like blank units)
+    if parts and parts[-1] == "":
+        parts = parts[:-1]
+
     if len(parts) < 12 or "," not in row:
         return None
 
