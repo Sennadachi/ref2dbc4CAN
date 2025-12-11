@@ -24,6 +24,7 @@ All processing happens automatically once you select your REF file - no manual h
 
 ### Prerequisites
 
+- Git
 - Python 3.7 or higher
 - pip (Python package manager)
 
